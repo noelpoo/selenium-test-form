@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+
+# VS Code settings
+.vscode/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Test reports
+*.html
+reports/
+report.html
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db

@@ -1,0 +1,81 @@
+[
+    {
+      "first_name": "Noel",
+      "last_name": "Test",
+      "email": "noel@example.com",
+      "gender": "Male",
+      "mobile_number": "91251122",
+      "date_of_birth": "11/11/1990",
+      "hobbies": ["Sports", "Music"],
+      "location": "East",
+      "attachment": "testfile_50MB.pdf",
+      "address": "123, Test Street, Singapore",
+      "should_pass": true
+    },
+    {
+      "first_name": "",
+      "last_name": "Lee",
+      "email": "bademail",
+      "gender": "",
+      "mobile_number": "",
+      "date_of_birth": "01/01/3000",
+      "hobbies": [],
+      "location": "North",
+      "attachment": "testfile_5kb.png",
+      "address": "123, Test Street, Singapore",
+      "should_pass": false
+    },
+    {
+      "first_name": "Alice",
+      "last_name": "Tan",
+      "email": "alice.tan@example.com",
+      "gender": "Female",
+      "mobile_number": "88885555",
+      "date_of_birth": "02/02/1985",
+      "hobbies": ["Reading"],
+      "location": "",
+      "attachment": "",
+      "address": "",
+      "should_pass": true
+    },
+    {
+      "first_name": "Bob",
+      "last_name": "Ng",
+      "email": "bob.ng@example.com",
+      "gender": "Male",
+      "mobile_number": "abc12345",
+      "date_of_birth": "12/12/1990",
+      "hobbies": ["Music"],
+      "location": "",
+      "attachment": "",
+      "address": "",
+      "should_pass": false
+    },
+    {
+      "first_name": "Carol",
+      "last_name": "Lim",
+      "email": "carol.lim@example.com",
+      "gender": "Female",
+      "mobile_number": "91231234",
+      "date_of_birth": "01/01/2000",
+      "hobbies": ["Sports"],
+      "location": "West",
+      "attachment": "testfile_5kb.png",
+      "address": "",
+      "should_pass": true
+    },
+    {
+      "first_name": "Dave",
+      "last_name": "",
+      "email": "dave@example.com",
+      "gender": "Male",
+      "mobile_number": "91112222",
+      "date_of_birth": "31/12/2025",
+      "hobbies": ["Music"],
+      "location": "",
+      "attachment": "",
+      "address": "",
+      "should_pass": false
+    }
+  ]
+  
