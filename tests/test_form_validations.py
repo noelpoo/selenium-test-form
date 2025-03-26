@@ -1,5 +1,4 @@
 import pytest
-import time
 from pages.form.form_page import FormPage
 from pages.form.confirmation_page import ConfirmationPage
 from utils.config import BASE_URL
