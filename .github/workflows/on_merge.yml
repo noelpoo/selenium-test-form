@@ -13,31 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-    #   - name: Setup Node.js
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: 18.18.0
-
-    #   - name: Install frontend dependencies
-    #     run: |
-    #       cd frontend
-    #       npm ci
-
-    #   - name: Build frontend
-    #     run: |
-    #       cd frontend
-    #       npm run build
-
-      - name: Deploy to test environment (mock)
+      - name: Deploy to test environment (Mock)
         run: |
-          echo "Simulating deployment to https://test.env.example.com"
-          echo "Sleeping to simulate deploy time..."
+          echo "Simulating deployment to https://test.dev.com"
+          echo "Deploying..."
           sleep 10
 
   run-selenium-tests:
-    name: Run End-to-End Tests
+    name: Run Selenium Tests in ${{ matrix.browser }}
     runs-on: ubuntu-latest
     needs: build-and-deploy
+
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
 
     steps:
       - name: Checkout code
@@ -46,7 +35,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.14.0
+          python-version: 3.10
 
       - name: Cache pip dependencies
         uses: actions/cache@v3
@@ -62,22 +51,24 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Install Google Chrome
+      - name: Install browsers
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y \
+            google-chrome-stable \
+            firefox \
+            microsoft-edge-stable 
 
-      - name: Run Selenium tests against deployed frontend
+      - name: Run Selenium tests with ${{ matrix.browser }}
         env:
-          #  BASE_URL and other sensitive information should be stored as a secrets in repo settings 
-          BASE_URL: "${{ secrets.BASE_URL }}" 
+          BASE_URL: "${{ secrets.BASE_URL }}"
         run: |
           source venv/bin/activate
-          pytest tests --html=report.html
+          pytest tests --browser=${{ matrix.browser }} --html=report-${{ matrix.browser }}.html
 
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: report
-          path: report.html
+          name: selenium-report-${{ matrix.browser }}
+          path: report-${{ matrix.browser }}.html

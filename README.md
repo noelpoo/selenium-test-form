@@ -89,3 +89,16 @@ Follow these steps to set up the project:
     ```sh
     pytest --html=report.html
     ```
+7. **Run the tests in various browsers:**
+    - Chrome:
+    ```
+    pytest --html=report.html --browser=chrome
+    ```
+    - Firefox:
+    ```
+    pytest --html=report.html --browser=firefox
+    ```
+    - MS Edge:
+    ```
+    pytest --html=report.html --browser=edge
+    ```
