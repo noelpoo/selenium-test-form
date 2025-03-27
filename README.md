@@ -1,10 +1,10 @@
-# 🧪 Selenium Automation Suite - Test Form Submission
+# Selenium Automation Suite - Test Form Submission
 
 This project automates the testing of a web form using **Selenium WebDriver** with **Python**, applying the **Page Object Model (POM)** design pattern, **data-driven testing**, and supporting both positive and negative validation flows.
 
 ---
 
-## 🚀 Features
+## Features
 - ✅ Full-form end-to-end test coverage
 - ✅ Field-by-field validation (required fields, formats, etc.)
 - ✅ Data-driven tests from JSON
@@ -17,7 +17,7 @@ This project automates the testing of a web form using **Selenium WebDriver** wi
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 selenium-test-form/
@@ -60,7 +60,7 @@ Follow these steps to set up the project:
 
 2. **Create and activate a virtual environment**:
     ```sh
-    python3 -m venv venv
+    python -m venv venv
     source venv/bin/activate
     ```
 
