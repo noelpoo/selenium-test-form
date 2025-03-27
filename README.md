@@ -152,4 +152,4 @@ Follow these steps to set up the project:
         - Installs dependencies from `requirements.txt`
         - Launches Selenium-compatible browsers via the GitHub-hosted runners
         - Executes tests and reports results
-        - Uploads screenshots and logs on failure for debugging
+        - Uploads test reports as artifacts
