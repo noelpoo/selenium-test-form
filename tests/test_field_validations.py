@@ -185,7 +185,7 @@ def test_attachment(browser, file_name, should_pass):
     else:
         assert form.attachments_feedback.is_visible() == True
 
-# @pytest.mark.skip(reason="Skipping this test temporarily")
+@pytest.mark.skip(reason="Skipping this test as its an optional field")
 @pytest.mark.parametrize("location", [
     ("North"),
     ("South"),
