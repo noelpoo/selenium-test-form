@@ -5,15 +5,12 @@ This project automates the testing of a web form using **Selenium WebDriver** wi
 ---
 
 ## Features
-- ✅ Full-form end-to-end test coverage
-- ✅ Field-by-field validation (required fields, formats, etc.)
-- ✅ Data-driven tests from JSON
-- ✅ Page Object Model for modular, maintainable code
-- ✅ Optional field handling (e.g. location, file upload)
-- ✅ Cross-browser testing support (Chrome, Firefox, Edge)
-- ✅ Assertion of form submission success or failure
-- ✅ Confirmation page detection
-- ✅ Easily extendable and CI-ready
+-  Full-form end-to-end test coverage
+-  Field-by-field validation (required fields, formats, etc.)
+-  Data-driven tests from JSON
+-  Page Object Model for modular, maintainable code
+-  Cross-browser testing support (Chrome, Firefox, Edge)
+-  Integrated into GitHub Actions CI pipeline
 
 ---
 
