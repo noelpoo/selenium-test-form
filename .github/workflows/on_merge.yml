@@ -75,9 +75,9 @@ jobs:
           source venv/bin/activate
           pytest tests --html=report.html
 
-    #   - name: Upload test report
-    #     if: always()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: report
-    #       path: report.html
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: report.html
