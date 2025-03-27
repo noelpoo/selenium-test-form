@@ -9,6 +9,7 @@ This project automates the testing of a web form using **Selenium WebDriver** wi
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Setup](#setup)
+- [Sample Test Report](#sample-test-report)
 - [Test Strategy Overview](#test-strategy-overview)
   - [Approach](#approach)
   - [Page Object Model (POM)](#page-object-model-pom-architecture)
@@ -115,6 +116,9 @@ Follow these steps to set up the project:
     ```
     pytest --html=report.html --browser=edge
     ```
+
+## Sample Test Report ##
+https://noelpoo.github.io/selenium-test-form/report.html?sort=result
 
 ## Test Strategy Overview
 
