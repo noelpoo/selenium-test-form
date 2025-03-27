@@ -46,7 +46,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: 3.14.0
 
       - name: Cache pip dependencies
         uses: actions/cache@v3
@@ -73,11 +73,11 @@ jobs:
           BASE_URL: "${{ secrets.BASE_URL }}" 
         run: |
           source venv/bin/activate
-          pytest tests --html=selenium-report.html
+          pytest tests --html=report.html
 
     #   - name: Upload test report
     #     if: always()
     #     uses: actions/upload-artifact@v3
     #     with:
-    #       name: selenium-report
-    #       path: selenium-report.html
+    #       name: report
+    #       path: report.html
