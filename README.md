@@ -60,6 +60,7 @@ selenium-test-form/
 │
 ├── .gitignore                     # Files and folders to exclude from Git
 ├── requirements.txt               # Project dependencies
+├── conftest.py                    # Pytest configuration and fixtures
 └── README.md                      # Project documentation (you’re here!)
 
 ```
