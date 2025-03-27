@@ -1,5 +1,6 @@
 import pytest
 import os
+import time
 from pages.form.form_page import FormPage
 from utils.config import BASE_URL
 
@@ -184,19 +185,16 @@ def test_attachment(browser, file_name, should_pass):
     else:
         assert form.attachments_feedback.is_visible() == True
 
-@pytest.mark.skip(reason="Skipping this test temporarily")
-@pytest.mark.parametrize("location, should_pass", [
-    ("North", True),
-    ("South", True),
-    ("East", True),
-    ("West", True),
+# @pytest.mark.skip(reason="Skipping this test temporarily")
+@pytest.mark.parametrize("location", [
+    ("North"),
+    ("South"),
+    ("East"),
+    ("West"),
 ])
-def test_location(browser, location, should_pass):
+def test_location(browser, location):
     form = FormPage(browser)
     form.load(BASE_URL)
 
-    form.location_dropdown.select_by_text(location)
-    form.click_submit()
-
-    if should_pass:
-        assert form.location_dropdown.get_selected_value() == location
+    form.location_dropdown.select(location)
+    

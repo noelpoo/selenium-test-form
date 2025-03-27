@@ -1,9 +1,5 @@
 import os
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-
 
 class TextInput:
     def __init__(self, driver, locator):
@@ -76,30 +72,27 @@ class FileUploadInput:
         self.driver.find_element(*self.locator).send_keys(file_path)
 
 class Dropdown:
-    def __init__(self, driver, toggle_locator, options_locator, input_locator):
+    def __init__(self, driver, toggle_locator, option_locator, input_locator):
         self.driver = driver
         self.toggle_locator = toggle_locator
-        self.options_locator = options_locator
+        self.option_locator = option_locator 
         self.input_locator = input_locator
 
     def open(self):
-        self.driver.find_element(*self.toggle_locator).click()
+        toggle = self.driver.find_element(*self.toggle_locator)
+        toggle.click()
 
-    def select_by_text(self, text):
-        self.open()
-        WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_any_elements_located(self.options_locator)
-        )
-
-        spans = self.driver.find_elements(By.CSS_SELECTOR, "li[role='option'] span.css-0")
-        for span in spans:
-            print('logging', span)
-            if span.text.strip().lower() == text.lower():
-                ActionChains(self.driver).move_to_element(span).click().perform()
-                return
-
-        raise ValueError(f"Option with text '{text}' not found in dropdown.")
-    
-    def get_selected_value(self):
+    def input_text(self, text):
         input_el = self.driver.find_element(*self.input_locator)
-        return input_el.get_attribute("value")
+        input_el.clear()
+        input_el.send_keys(text)
+
+    def select(self, text):
+        if not text:
+            return
+            
+        self.open()
+        self.input_text(text)
+        option = self.driver.find_element(*self.option_locator)
+        option.click()
+

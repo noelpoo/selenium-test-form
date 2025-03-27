@@ -8,10 +8,23 @@
       "date_of_birth": "11/11/1990",
       "hobbies": ["Sports", "Music"],
       "location": "East",
-      "attachment": "testfile_50MB.pdf",
+      "attachment": "testfile_5kb.png",
       "address": "123, Test Street, Singapore",
       "should_pass": true
     },
+    {
+        "first_name": "Joel",
+        "last_name": "Test",
+        "email": "joel@example.com",
+        "gender": "Male",
+        "mobile_number": "91251222",
+        "date_of_birth": "11/11/1001",
+        "hobbies": ["Sports", "Music"],
+        "location": "East",
+        "attachment": "testfile_50MB.pdf",
+        "address": "123, Test Street, Singapore",
+        "should_pass": true
+      },
     {
       "first_name": "",
       "last_name": "Lee",

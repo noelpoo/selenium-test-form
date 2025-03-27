@@ -34,12 +34,11 @@ class FormPage:
         self.attachments = FileUploadInput(driver, (By.ID, "645354f093ceeb0012cc628a"))
         self.attachments_feedback = FieldFeedback(driver, (By.ID, "645354f093ceeb0012cc628a-feedback"))
 
-        # need to fix this locator, its not working
         self.location_dropdown = Dropdown(
             driver, 
             toggle_locator=(By.ID, "downshift-0-toggle-button"),
-            options_locator=(By.CSS_SELECTOR, "li[role='option']"),
-            input_locator=(By.ID, "6453551e00efba001225204b")
+            option_locator=(By.ID, "downshift-0-item-0"),
+            input_locator=(By.ID, "6453551e00efba001225204b"),
         )
 
         self.address = TextInput(driver, (By.ID, "6453553781cb0e001299cc83"))

@@ -1,4 +1,5 @@
 import pytest
+import os
 from pages.form.form_page import FormPage
 from pages.form.confirmation_page import ConfirmationPage
 from utils.config import BASE_URL
@@ -17,7 +18,7 @@ def test_full_form_submission(browser, data):
     
     gender = data["gender"]
     if gender == "Male":
-        form.gender_female_radio.select()
+        form.gender_male_radio.select()
     elif gender == "Female":
         form.gender_female_radio.select()
     else:
@@ -26,18 +27,23 @@ def test_full_form_submission(browser, data):
     form.mobile_number.enter_text(data["mobile_number"])
     form.date_of_birth.enter_date(data["date_of_birth"])
 
-    form.hobbies_sports_checkbox.uncheck()
-    form.hobbies_music_checkbox.uncheck()
-    form.hobbies_reading_checkbox.uncheck()
+    checkbox_map = {
+    "Sports": form.hobbies_sports_checkbox,
+    "Music": form.hobbies_music_checkbox,
+    "Reading": form.hobbies_reading_checkbox,
+    }
 
+    for cb in checkbox_map.values():
+        cb.uncheck()
 
-    if "Sports" in data["hobbies"]:
-        form.hobbies_sports_checkbox.check()
-    if "Music" in data["hobbies"]:
-        form.hobbies_music_checkbox.check()
-    if "Reading" in data["hobbies"]:
-        form.hobbies_reading_checkbox.check()
+    for hobby in data["hobbies"]:
+        checkbox_map[hobby].check()
 
+    if data["attachment"]:
+        file_path = os.path.abspath(os.path.join("data", data["attachment"]))
+        form.attachments.upload(file_path)
+
+    form.location_dropdown.select(data["location"])
     form.address.enter_text(data["address"])
 
     form.click_submit()
