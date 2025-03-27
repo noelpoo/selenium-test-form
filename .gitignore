@@ -15,6 +15,7 @@ __pycache__/
 *.html
 reports/
 report.html
+assets/
 
 # Logs
 *.log
@@ -23,4 +24,5 @@ report.html
 .DS_Store
 Thumbs.db
 
-assets/
+# Secrets
+.env
