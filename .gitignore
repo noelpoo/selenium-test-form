@@ -11,12 +11,6 @@ __pycache__/
 *.pyd
 *.pyc
 
-# Test reports
-*.html
-reports/
-report.html
-assets/
-
 # Logs
 *.log
 
