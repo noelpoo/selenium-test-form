@@ -4,11 +4,12 @@ from pages.form.form_page import FormPage
 from pages.form.confirmation_page import ConfirmationPage
 from utils.config import BASE_URL
 from utils.data_loader import load_json_data
+from utils.assertions import assert_confirmation_page
 
 form_test_data = load_json_data("form_test_data.json")
 
 @pytest.mark.parametrize("data", form_test_data)
-def test_full_form_submission(browser, data):
+def test_full_form_submission_with_json_data(browser, data):
     form = FormPage(browser)
     form.load(BASE_URL)
 
@@ -49,7 +50,5 @@ def test_full_form_submission(browser, data):
     form.click_submit()
 
     confirmation_page = ConfirmationPage(browser)
-    if data["should_pass"]:
-        assert confirmation_page.is_displayed()
-    else:
-        assert not confirmation_page.is_displayed()
+
+    assert_confirmation_page(confirmation_page, data["should_pass"])

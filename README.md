@@ -57,6 +57,7 @@ selenium-test-form/
 ├── utils/
 │   ├── config.py                  # Test environment config (e.g., BASE_URL)
 │   └── data_loader.py             # Utility to load test data from JSON
+|   └── assertions.py              # Utility functions to help with common test assertions
 │
 ├── .gitignore                     # Files and folders to exclude from Git
 ├── requirements.txt               # Project dependencies
