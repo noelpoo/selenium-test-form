@@ -56,13 +56,13 @@ selenium-test-form/
 |
 ├── utils/
 │   ├── config.py                  # Test environment config (e.g., BASE_URL)
-│   └── data_loader.py             # Utility to load test data from JSON
+│   └── data_loader.py             # Utility to load test data from JSON file
 |   └── assertions.py              # Utility functions to help with common test assertions
 │
 ├── .gitignore                     # Files and folders to exclude from Git
 ├── requirements.txt               # Project dependencies
 ├── conftest.py                    # Pytest configuration and fixtures
-└── README.md                      # Project documentation (you’re here!)
+└── README.md                      # Project documentation
 
 ```
 ## Setup
