@@ -92,7 +92,7 @@ jobs:
       - name: Prepare report directory
         run: |
           mkdir -p gh-pages
-          cp report-artifacts/selenium-report-chrome/report-chrome.html gh-pages/index.html
+          cp report-artifacts/selenium-report-chrome/report-chrome.html gh-pages/report.html
           cp report-artifacts/selenium-report-edge/report-edge.html gh-pages/report-edge.html
 
       - name: Deploy to GitHub Pages
