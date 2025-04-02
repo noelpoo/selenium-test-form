@@ -71,4 +71,4 @@ jobs:
         uses: actions/upload-artifact@v4.6.2
         with:
           name: selenium-report-${{ matrix.browser }}
-          path: ${{ secrets.ARTIFACT_PATH }}/report-${{ matrix.browser }}.html
+          path: ./reports/report-${{ matrix.browser }}.html
