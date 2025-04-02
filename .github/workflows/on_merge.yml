@@ -1,13 +1,28 @@
-name: selenium-e2e
+name: on-merge
 
 on:
   push:
     branches: [develop]
 
 jobs:
-  selenium-tests:
-    name: Run Selenium tests in ${{ matrix.browser }}
+  build-and-deploy:
+    name: Build & Deploy Frontend (Mock)
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to test environment (Mock)
+        run: |
+          echo "Simulating deployment to https://test.dev.com"
+          echo "Deploying..."
+          sleep 10
+
+  run-selenium-tests:
+    name: Run Selenium Tests in ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
 
     strategy:
       matrix:
@@ -20,66 +35,40 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.9'
 
-      - name: Install pip dependencies
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Chrome + chromedriver
-        if: matrix.browser == 'chrome'
+      - name: Install browsers
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip"
-          unzip chromedriver.zip
-          sudo mv chromedriver /usr/local/bin/
-          chromedriver --version
+          sudo apt-get install -y \
+            google-chrome-stable \
+            firefox \
+            microsoft-edge-stable 
 
-      - name: Install Firefox + geckodriver
-        if: matrix.browser == 'firefox'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          GECKO_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep "tag_name" | cut -d '"' -f4)
-          wget -O geckodriver.tar.gz "https://github.com/mozilla/geckodriver/releases/download/${GECKO_VERSION}/geckodriver-${GECKO_VERSION}-linux64.tar.gz"
-          tar -xvzf geckodriver.tar.gz
-          chmod +x geckodriver
-          sudo mv geckodriver /usr/local/bin/
-          geckodriver --version
-
-      - name: Install Edge + msedgedriver
-        if: matrix.browser == 'edge'
-        run: |
-          sudo apt-get update
-          sudo apt install -y software-properties-common
-          curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-          sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-          sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-          sudo apt-get update
-          sudo apt-get install -y microsoft-edge-stable
-          EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+')
-          wget -O msedgedriver.zip "https://msedgedriver.azureedge.net/${EDGE_VERSION}/edgedriver_linux64.zip"
-          unzip msedgedriver.zip
-          sudo mv msedgedriver /usr/local/bin/
-          msedgedriver --version
-
-      - name: Run Selenium Tests in ${{ matrix.browser }}
+      - name: Run Selenium tests with ${{ matrix.browser }}
         env:
           BASE_URL: "${{ secrets.BASE_URL }}"
         run: |
           source venv/bin/activate
           pytest tests --browser=${{ matrix.browser }} --html=report-${{ matrix.browser }}.html
 
-      - name: Upload HTML Report
+      - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: selenium-report-${{ matrix.browser }}
-          path: report-${{ matrix.browser }}.html
+          path: ${{ secrets.ARTIFACT_PATH }}/report-${{ matrix.browser }}.html
